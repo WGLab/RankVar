@@ -65,10 +65,28 @@ After that, you will find the result files ```phen2gene_out/output_file.associat
 
 ### Step 3: Run RanVar in linux
 
-Input files to RankVar are VCF file (hg38 referene genome is recommended) and HPO file
+Input files to RankVar are annotated VCF file (```myanno.hg38_multianno.txt```) and HPO file (```phen2gene_out/output_file.associated_gene_list```)
 
-Here is an example file called hpo_list.txt
+Type python RankVar/RankVar.py -help to see all options.
+```bash
+usage: RankVar.py [-h] --annovar ANNOVAR --output OUTPUT --hpo_ids HPO_IDS --phen2gene PHEN2GENE [--gq GQ] [--ad AD]
+                  [--gnomad GNOMAD]
 
+Parse arguments for genetic analysis software.
+
+options:
+  -h, --help            show this help message and exit
+  --annovar ANNOVAR     Path to the annotated VCF file (default: None)
+  --output OUTPUT       Path to the output folder (default: None)
+  --hpo_ids HPO_IDS     Path to the HPO id file (default: None)
+  --phen2gene PHEN2GENE
+                        Path to the Phen2Gene score file (default: None)
+  --gq GQ               Genotype Quality threshold (float) (default: 20)
+  --ad AD               Allelic Depth threshold (float) (default: 15)
+  --gnomad GNOMAD       GnomAD frequency threshold (float) (default: 0.0001)
+```
+
+#### Example
 
 
 
