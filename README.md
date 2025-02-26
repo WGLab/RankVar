@@ -2,7 +2,7 @@
 RankVar is an AI-driven pipeline that integrates phenotype data and sequencing profiles to prioritize disease-causing genes and variants.
 
 # Installation
-### Step 1: install sources
+
 We recommend using Conda to set up the environment. If Conda is not installed, run the following commands in Linux to install it.
 
 ```bash
@@ -17,4 +17,38 @@ cd RankVar
 ```
 
 # Inference
+### Step 1: Install and run ANNOVAR
+ANNOVAR is an efficient software tool to utilize update-to-date information to functionally annotate genetic variants detected from diverse genomes.
 
+#### a) Install ANNOVAR
+
+Typically you will go to the [ANNOVAR website](https://annovar.openbioinformatics.org/en/latest/), fill in a registration form, and download the package there. When you have requested the ANNOVAR from the website and downloaded it, you will receive a compressed file ```annovar.latest.tar.gz```, you will need to unzip it. Then follow the user guide to install ANNOVAR. 
+
+#### b) Run ANNOVAR
+
+Input files to ANNOVAR refer to VCF file (example.vcf)
+
+```bash
+perl table_annovar.pl example.vcf humandb/ -buildver hg38 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp47a,gnomad41_exome,gnomad41_genome,clinvar_20240917,eQTL,sQTL -operation gx,r,f,f,f,f,f,f,f,f -nastring . -vcfinput -polish
+```
+After that, you will find the result files myanno.hg38_multianno.txt and myanno.hg38_multianno.vcf.
+
+### Step 2: Install and run Phen2Gene
+Phen2Gene is a phenotype-driven gene prioritization tool, that takes HPO (Human Phenotype Ontology) IDs as inputs, searches and prioritizes candidate causal disease genes.
+
+#### a) Install Phen2gene
+
+```bash
+git clone https://github.com/WGLab/Phen2Gene.git
+cd Phen2Gene
+conda env create -f environment.yml
+conda activate phen2gene
+bash setup.sh
+```
+#### b) Run Phen2Gene
+
+Input files to Phen2Gene should contain HPO IDs, separated by UNIX-recognized new line characters (i.e., \n). Alternatively you can use a space separated list of HPO IDs on the command line.
+
+```bash
+python3 phen2gene.py -f example/HPO_sample.txt -out out/prioritizedgenelist
+```
