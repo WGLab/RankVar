@@ -14,6 +14,8 @@ After conda is installed successfully, RankVar sources can be downloaded:
 ```bash
 git clone https://github.com/WGLab/RankVar.git
 cd RankVar
+conda env create --name rankvar --file environment.yml
+conda activate rankvar
 ```
 
 # Inference
