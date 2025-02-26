@@ -39,14 +39,8 @@ After that, you will find the result files ```myanno.hg38_multianno.txt``` and `
 Phen2Gene is a phenotype-driven gene prioritization tool, that takes HPO (Human Phenotype Ontology) IDs as inputs, searches and prioritizes candidate causal disease genes.
 
 #### a) Install Phen2gene
+Please follow [Phen2gene](https://github.com/WGLab/Phen2Gene) repository for instructions on how to install Phen2gene.
 
-```bash
-git clone https://github.com/WGLab/Phen2Gene.git
-cd Phen2Gene
-conda env create -f environment.yml
-conda activate phen2gene
-bash setup.sh
-```
 #### b) Run Phen2Gene
 
 Input files to Phen2Gene should contain HPO IDs, separated by UNIX-recognized new line characters (i.e., \n). Alternatively you can use a space separated list of HPO IDs on the command line.
@@ -61,7 +55,7 @@ HP:0000252
 ```
 simply run:
 ```bash
-python3 phen2gene.py -f example/hpo_list.txt -out phen2gene_out
+python3 phen2gene.py -f hpo_list.txt -out phen2gene_out
 ```
 After that, you will find the result files ```phen2gene_out/output_file.associated_gene_list```
 
