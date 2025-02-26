@@ -65,11 +65,12 @@ python3 phen2gene.py -f example/hpo_list.txt -out phen2gene_out
 ```
 After that, you will find the result files ```phen2gene_out/output_file.associated_gene_list```
 
-### Step 3: Run RanVar in linux
+### Step 3: Run RanVar
 
-Input files to RankVar are annotated VCF file (```myanno.hg38_multianno.txt```) and HPO terms related Phen2gene score file (```phen2gene_out/output_file.associated_gene_list```)
+Input files to RankVar are annotated VCF file (```myanno.hg38_multianno.txt```) and HPO terms (```hpo_list.txt```) and related Phen2gene score file (```phen2gene_out/output_file.associated_gene_list```)
 
-Type python RankVar/RankVar.py -help to see all options.
+Type ```python RankVar/RankVar.py -help``` to see all options.
+
 ```bash
 usage: RankVar.py [-h] --annovar ANNOVAR --output OUTPUT --hpo_ids HPO_IDS --phen2gene PHEN2GENE [--gq GQ] [--ad AD]
                   [--gnomad GNOMAD]
@@ -90,18 +91,21 @@ options:
 
 #### Example
 
-Download the example VCF files:
+Download the example VCF file:
+
 ```bash
 wget https://pmc.ncbi.nlm.nih.gov/articles/instance/5111005/bin/supp_mcs.a001131_Supp_File_2_KBG_family_Utah_VCF_files.zip
 unzip supp_mcs.a001131_Supp_File_2_KBG_family_Utah_VCF_files.zip
 ```
+
 After that, you will find the ```proband.vcf```
 
-I am using GATK to convert ```proband.vcf``` from hg19 to hg38 and generate the ```proband.hg38.vcf```:
+If the input VCF is in hg19, you need to convert it to hg38 using GATK:
 
 ```bash
 gatk --java-options "-Xmx16g" LiftoverVcf -I proband.vcf -O proband.hg38.vcf -CHAIN hg19ToHg38.over.chain.gz -REJECT unmapped_variants.vcf -R Homo_sapiens_assembly38.fasta
 ```
+After that, you will find the result file ```proband.hg38.vcf```:
 
 then, run annovar on ```proband.hg38.vcf``` and Phen2gene on ```hpo_list.txt``` to generate the files ```myanno.proband.hg38_multianno.txt``` and ```phen2gene_out/output_file.associated_gene_list```
 
