@@ -31,7 +31,7 @@ Input files to ANNOVAR refer to VCF file (example.vcf)
 ```bash
 perl table_annovar.pl example.vcf humandb/ -buildver hg38 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp47a,gnomad41_exome,gnomad41_genome,clinvar_20240917,eQTL,sQTL -operation gx,r,f,f,f,f,f,f,f,f -nastring . -vcfinput -polish
 ```
-After that, you will find the result files myanno.hg38_multianno.txt and myanno.hg38_multianno.vcf.
+After that, you will find the result files ```myanno.hg38_multianno.txt``` and ```myanno.hg38_multianno.vcf```.
 
 ### Step 2: Install and run Phen2Gene
 Phen2Gene is a phenotype-driven gene prioritization tool, that takes HPO (Human Phenotype Ontology) IDs as inputs, searches and prioritizes candidate causal disease genes.
@@ -47,13 +47,27 @@ bash setup.sh
 ```
 #### b) Run Phen2Gene
 
-Input files to Phen2Gene should contain HPO IDs (hpo_list.txt), separated by UNIX-recognized new line characters (i.e., \n). Alternatively you can use a space separated list of HPO IDs on the command line.
+Input files to Phen2Gene should contain HPO IDs, separated by UNIX-recognized new line characters (i.e., \n). Alternatively you can use a space separated list of HPO IDs on the command line.
 
+Here is an example file called ```hpo_list.txt```
 ```bash
-python3 phen2gene.py -f example/HPO_sample.txt -out out/prioritizedgenelist
+HP:0000358
+HP:0000039
+HP:0008438
+HP:0000891
+HP:0000252
 ```
+simply run:
+```bash
+python3 phen2gene.py -f example/hpo_list.txt -out phen2gene_out
+```
+After that, you will find the result files ```phen2gene_out/output_file.associated_gene_list```
 
+### Step 3: Run RanVar in linux
 
+Input files to RankVar are VCF file (hg38 referene genome is recommended) and HPO file
+
+Here is an example file called hpo_list.txt
 
 
 
