@@ -1,4 +1,4 @@
-# RankVar
+# RankVar: Machine Learning-Based Variant Ranking and Reinterpretation for Rare Genetic Diseases
 RankVar is an AI-driven pipeline that integrates phenotype data and sequencing profiles to prioritize disease-causing genes and variants.
 
 # Installation
@@ -106,4 +106,14 @@ then, run annovar on ```proband.hg38.vcf``` and Phen2gene on ```hpo_list.txt``` 
 run RankVar:
 ```bash
 python RankVar.py --annovar myanno.proband.hg38_multianno.txt --phen2gene phen2gene_out/output_file.associated_gene_list  --hpo_ids hpo_list.txt --output $PWD
+```
+RankVar will output results below:
+```
+Chr    Start      End        Ref  Alt  Func.refGene  Gene.refGene  ExonicFunc.refGene       gnomad41_exome_AF_grpmax  phen2gene_score  pathogenicity_score  rank
+chr16  89280526   89280526   -    T    exonic       ANKRD11       frameshift insertion     0.0                      1.0               1.0                  1.0
+chr16  27701625   27701625   C    -    exonic       KATNIP        frameshift deletion      0.0                      0.0               1.0                  1.0
+chr19  13298600   13298600   G    -    exonic       CACNA1A       frameshift deletion      0.0                      0.085824          0.77                 2.0
+chr2   202555679  202555679  -    A    exonic       BMPR2         frameshift insertion     0.0                      0.108457          0.65                 3.0
+chr19  53889950   53889950   -    G    exonic       PRKCG         frameshift insertion     0.0                      0.158115          0.59                 4.0
+chr12  48966504   48966504   C    -    exonic       WNT10B        frameshift deletion      0.0                      0.1344            0.49                 5.0
 ```
