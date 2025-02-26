@@ -47,8 +47,15 @@ bash setup.sh
 ```
 #### b) Run Phen2Gene
 
-Input files to Phen2Gene should contain HPO IDs, separated by UNIX-recognized new line characters (i.e., \n). Alternatively you can use a space separated list of HPO IDs on the command line.
+Input files to Phen2Gene should contain HPO IDs (hpo_list.txt), separated by UNIX-recognized new line characters (i.e., \n). Alternatively you can use a space separated list of HPO IDs on the command line.
 
 ```bash
 python3 phen2gene.py -f example/HPO_sample.txt -out out/prioritizedgenelist
 ```
+
+
+
+
+
+
+
