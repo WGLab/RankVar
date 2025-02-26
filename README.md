@@ -105,7 +105,7 @@ Then, run annovar on ```proband.hg38.vcf``` and Phen2gene on ```hpo_list.txt``` 
 
 run RankVar:
 ```bash
-python RankVar.py --annovar myanno.proband.hg38_multianno.txt --phen2gene phen2gene_out/output_file.associated_gene_list  --hpo_ids hpo_list.txt --output $PWD
+python RankVar.py --annovar myanno.proband.hg38_multianno.txt --phen2gene phen2gene_out/output_file.associated_gene_list  --hpo_ids hpo_list.txt --output output/
 ```
 RankVar will output results below:
 ```
