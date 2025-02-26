@@ -116,4 +116,5 @@ chr19  13298600   13298600   G    -    exonic       CACNA1A       frameshift del
 chr2   202555679  202555679  -    A    exonic       BMPR2         frameshift insertion     0.0                      0.108457          0.65                 3.0
 chr19  53889950   53889950   -    G    exonic       PRKCG         frameshift insertion     0.0                      0.158115          0.59                 4.0
 chr12  48966504   48966504   C    -    exonic       WNT10B        frameshift deletion      0.0                      0.1344            0.49                 5.0
+...
 ```
