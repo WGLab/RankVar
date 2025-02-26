@@ -31,7 +31,7 @@ Typically you will go to the [ANNOVAR website](https://annovar.openbioinformatic
 Input files to ANNOVAR refer to VCF file (example.vcf)
 
 ```bash
-perl table_annovar.pl example.vcf humandb/ -buildver hg38 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp47a,gnomad41_exome,gnomad41_genome,clinvar_20240917,eQTL,sQTL -operation gx,r,f,f,f,f,f,f,f,f -nastring . -vcfinput -polish
+perl table_annovar.pl example.vcf humandb/ -buildver hg38 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp47a,gnomad41_exome,gnomad41_genome,clinvar_20240917,GTEx_v8_eQTL,GTEx_v8_sQTL -operation gx,r,f,f,f,f,f,f,f,f -nastring . -vcfinput -polish
 ```
 After that, you will find the result files ```myanno.hg38_multianno.txt``` and ```myanno.hg38_multianno.vcf```.
 
