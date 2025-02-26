@@ -65,7 +65,7 @@ After that, you will find the result files ```phen2gene_out/output_file.associat
 
 ### Step 3: Run RanVar in linux
 
-Input files to RankVar are annotated VCF file (```myanno.hg38_multianno.txt```) and HPO related Phen2gene score file (```phen2gene_out/output_file.associated_gene_list```)
+Input files to RankVar are annotated VCF file (```myanno.hg38_multianno.txt```) and HPO terms related Phen2gene score file (```phen2gene_out/output_file.associated_gene_list```)
 
 Type python RankVar/RankVar.py -help to see all options.
 ```bash
