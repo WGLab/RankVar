@@ -88,7 +88,7 @@ options:
 
 #### Example
 
-a) Download the example VCF files:
+Download the example VCF files:
 ```bash
 wget https://pmc.ncbi.nlm.nih.gov/articles/instance/5111005/bin/supp_mcs.a001131_Supp_File_2_KBG_family_Utah_VCF_files.zip
 unzip supp_mcs.a001131_Supp_File_2_KBG_family_Utah_VCF_files.zip
@@ -100,5 +100,10 @@ I am using GATK to convert ```proband.vcf``` from hg19 to hg38 and generate the 
 ```bash
 gatk --java-options "-Xmx16g" LiftoverVcf -I proband.vcf -O proband.hg38.vcf -CHAIN hg19ToHg38.over.chain.gz -REJECT unmapped_variants.vcf -R Homo_sapiens_assembly38.fasta
 ```
-b) the 
 
+then, run annovar on ```proband.hg38.vcf``` and Phen2gene on ```hpo_list.txt``` to generate the files ```myanno.proband.hg38_multianno.txt``` and ```phen2gene_out/output_file.associated_gene_list```
+
+run RankVar:
+```bash
+python RankVar.py --annovar myanno.proband.hg38_multianno.txt --phen2gene phen2gene_out/output_file.associated_gene_list  --hpo_ids hpo_list.txt --output $PWD
+```
