@@ -14,8 +14,10 @@ After conda is installed successfully, RankVar sources can be downloaded:
 ```bash
 git clone https://github.com/WGLab/RankVar.git
 cd RankVar
-conda env create --name rankvar --file environment.yml
+conda create -n rankvar python>=3.10
 conda activate rankvar
+pip install numpy pandas joblib sklearn
+python RankVar.py --help
 ```
 
 # Inference
@@ -31,7 +33,7 @@ Typically you will go to the [ANNOVAR website](https://annovar.openbioinformatic
 Input files to ANNOVAR refer to VCF file (example.vcf)
 
 ```bash
-perl table_annovar.pl example.vcf humandb/ -buildver hg38 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp47a,gnomad41_exome,gnomad41_genome,clinvar_20240917,eQTL,sQTL -operation gx,r,f,f,f,f,f,f,f,f -nastring . -vcfinput -polish
+perl table_annovar.pl example.vcf humandb/ -buildver hg38 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp47a,gnomad41_exome,gnomad41_genome,clinvar_20240917,GTEx_v8_eQTL,GTEx_v8_sQTL -operation gx,r,f,f,f,f,f,f,f,f -nastring . -vcfinput -polish
 ```
 After that, you will find the result files ```myanno.hg38_multianno.txt``` and ```myanno.hg38_multianno.vcf```.
 
@@ -105,9 +107,9 @@ Then, run annovar on ```proband.hg38.vcf``` and Phen2gene on ```hpo_list.txt``` 
 
 run RankVar:
 ```bash
-python RankVar.py --annovar myanno.proband.hg38_multianno.txt --phen2gene phen2gene_out/output_file.associated_gene_list  --hpo_ids hpo_list.txt --output $PWD
+python RankVar.py --annovar myanno.proband.hg38_multianno.txt --phen2gene phen2gene_out/output_file.associated_gene_list  --hpo_ids hpo_list.txt --output output/
 ```
-RankVar will output results below:
+RankVar will write output in `output/rank_var.tsv` that will look like:
 ```
 Chr    Start      End        Ref  Alt  Func.refGene  Gene.refGene  ExonicFunc.refGene       gnomad41_exome_AF_grpmax  phen2gene_score  pathogenicity_score  rank
 chr16  89280526   89280526   -    T    exonic       ANKRD11       frameshift insertion     0.0                      1.0               1.0                  1.0
