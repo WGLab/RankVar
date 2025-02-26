@@ -14,9 +14,9 @@ After conda is installed successfully, RankVar sources can be downloaded:
 ```bash
 git clone https://github.com/WGLab/RankVar.git
 cd RankVar
-conda create -n rankvar python>=3.10
+conda create -n rankvar python=3.10
 conda activate rankvar
-pip install numpy pandas joblib sklearn
+pip install numpy pandas joblib scikit-learn==1.3 torch
 python RankVar.py --help
 ```
 
