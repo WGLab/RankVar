@@ -14,8 +14,10 @@ After conda is installed successfully, RankVar sources can be downloaded:
 ```bash
 git clone https://github.com/WGLab/RankVar.git
 cd RankVar
-conda env create --name rankvar --file environment.yml
+conda env create --name rankvar python>=3.10
 conda activate rankvar
+pip install numpy pandas joblib sklearn
+python RankVar.py --help
 ```
 
 # Inference
@@ -107,7 +109,7 @@ run RankVar:
 ```bash
 python RankVar.py --annovar myanno.proband.hg38_multianno.txt --phen2gene phen2gene_out/output_file.associated_gene_list  --hpo_ids hpo_list.txt --output output/
 ```
-RankVar will output results below:
+RankVar will write output in `output/rank_var.tsv` that will look like:
 ```
 Chr    Start      End        Ref  Alt  Func.refGene  Gene.refGene  ExonicFunc.refGene       gnomad41_exome_AF_grpmax  phen2gene_score  pathogenicity_score  rank
 chr16  89280526   89280526   -    T    exonic       ANKRD11       frameshift insertion     0.0                      1.0               1.0                  1.0
