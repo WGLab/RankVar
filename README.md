@@ -105,9 +105,9 @@ If the input VCF is in hg19, you need to convert it to hg38 using GATK:
 ```bash
 gatk --java-options "-Xmx16g" LiftoverVcf -I proband.vcf -O proband.hg38.vcf -CHAIN hg19ToHg38.over.chain.gz -REJECT unmapped_variants.vcf -R Homo_sapiens_assembly38.fasta
 ```
-After that, you will find the result file ```proband.hg38.vcf```:
+After that, you will find the result file ```proband.hg38.vcf```
 
-then, run annovar on ```proband.hg38.vcf``` and Phen2gene on ```hpo_list.txt``` to generate the files ```myanno.proband.hg38_multianno.txt``` and ```phen2gene_out/output_file.associated_gene_list```
+Then, run annovar on ```proband.hg38.vcf``` and Phen2gene on ```hpo_list.txt``` to generate the files ```myanno.proband.hg38_multianno.txt``` and ```phen2gene_out/output_file.associated_gene_list```
 
 run RankVar:
 ```bash
