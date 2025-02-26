@@ -16,7 +16,7 @@ git clone https://github.com/WGLab/RankVar.git
 cd RankVar
 conda create -n rankvar python=3.10
 conda activate rankvar
-pip install numpy pandas joblib sklearn
+pip install numpy==1.25 pandas joblib scikit-learn==1.3 torch
 python RankVar.py --help
 ```
 
