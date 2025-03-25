@@ -261,7 +261,7 @@ def main(annovar, phen2gene, hpo_ids, gq, ad, gnomad, output):
     
     #select columns from annotated data
     info_columns=['Chr', 'Start', 'End', 'Ref', 'Alt', 'Func.refGene', 'Gene.refGene', 'ExonicFunc.refGene', 
-                  'gnomad41_exome_AF_grpmax','phen2gene_score']
+                  'gnomad41_exome_AF_grpmax', 'gnomad41_genome_AF_grpmax', 'phen2gene_score']
     rankscore_columns = [col for col in variants_gt.columns if col.endswith('rankscore') or col.endswith('QTL_gene')]
     select_columns=info_columns+rankscore_columns
     variants_data=variants_gt[select_columns].copy()
