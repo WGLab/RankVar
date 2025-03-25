@@ -5,30 +5,30 @@ import os
 import joblib
 import torch
 
-def extract_info_columns(df):
-    # Split Otherinfo12 and Otherinfo13 into lists
-    df['info_keys'] = df['Otherinfo12'].str.split(':')
-    df['info_values'] = df['Otherinfo13'].str.split(':')
+# def extract_info_columns(df):
+#     # Split Otherinfo12 and Otherinfo13 into lists
+#     df['info_keys'] = df['Otherinfo12'].str.split(':')
+#     df['info_values'] = df['Otherinfo13'].str.split(':')
     
-    # Extract values for AD and GQ
-    for col in ['AD', 'GQ']:
-        df[col] = df.apply(
-            lambda row: row['info_values'][row['info_keys'].index(col)]
-            if col in row['info_keys'] else None,
-            axis=1
-        )
+#     # Extract values for AD and GQ
+#     for col in ['AD', 'GQ']:
+#         df[col] = df.apply(
+#             lambda row: row['info_values'][row['info_keys'].index(col)]
+#             if col in row['info_keys'] else None,
+#             axis=1
+#         )
     
-    # Extract AD_alt from AD
-    df['AD_alt'] = df['AD'].apply(lambda x: x.split(',')[1] if x and ',' in x else None)
+#     # Extract AD_alt from AD
+#     df['AD_alt'] = df['AD'].apply(lambda x: x.split(',')[1] if x and ',' in x else None)
 
-    # Convert columns to integers
-    df['GQ'] = pd.to_numeric(df['GQ'], errors='coerce').fillna(0).astype(int)
-    df['AD_alt'] = pd.to_numeric(df['AD_alt'], errors='coerce').fillna(0).astype(int)
+#     # Convert columns to integers
+#     df['GQ'] = pd.to_numeric(df['GQ'], errors='coerce').fillna(0).astype(int)
+#     df['AD_alt'] = pd.to_numeric(df['AD_alt'], errors='coerce').fillna(0).astype(int)
 
-    # Drop helper columns
-    df = df.drop(columns=['info_keys', 'info_values'])
+#     # Drop helper columns
+#     df = df.drop(columns=['info_keys', 'info_values'])
     
-    return df
+#     return df
 
 #define exonic function
 def exonic_fun(fun):
