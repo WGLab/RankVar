@@ -61,7 +61,7 @@ def add_feature(mydata):
     dirname = os.path.dirname(__file__)
     #add LOEUF, PLI, and Haploinsufficiency
     #add LOEUF & PLI score
-    LOEUF_PLI=pd.read_csv('database/PLI_LOEUF.bed',sep='\t')
+    LOEUF_PLI=pd.read_csv(os.path.join(dirname, 'database/PLI_LOEUF.bed'),sep='\t')
     LOEUF_PLI=LOEUF_PLI[['geneName','_loeuf','_pli']]
     LOEUF_PLI.columns=['Gene.refGene','LOEUF','PLI']
     # Calculate the rank of each score (1 being the highest)
@@ -105,7 +105,7 @@ def add_feature(mydata):
     data_constraint['fracConsPr_score'] = data_constraint['fracConsPr'].fillna(0)
 
     # add disease constraint score (pHaplo, pTriplo)
-    pHaplo=pd.read_csv('database/pHaplo.csv', sep=',')
+    pHaplo=pd.read_csv(os.path.join(dirname,'database/pHaplo.csv'), sep=',')
     pHaplo=pHaplo[['Gene','pHaplo','pTriplo']]
     pHaplo.columns=['Gene.refGene','pHaplo','pTriplo']
     #merge data and disease constraint score
