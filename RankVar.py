@@ -195,18 +195,16 @@ def process_file(annotate_df, gq, ad, gnomad):
     
     # Replace '.' in gnomad41_exome_AF_grpmax with 0 and convert to float
     annotate_df['gnomad41_exome_AF_grpmax'] = annotate_df['gnomad41_exome_AF_grpmax'].replace('.', 0).astype(float)
+    # Replace '.' in gnomad41_genome_AF_grpmax with 0 and convert to float
+    annotate_df['gnomad41_genome_AF_grpmax'] = annotate_df['gnomad41_genome_AF_grpmax'].replace('.', 0).astype(float)
     
     # Create unique variant identifier
     annotate_df['variant_id'] = annotate_df['Chr'].astype(str) + "_" + annotate_df['Start'].astype(str) + "_" + annotate_df['Ref'] + "_" + annotate_df['Alt']
     
     # Define the functional filter
-    functional_filter = (
-        (annotate_df['Func.refGene'] == "splicing") |
-        (annotate_df['ExonicFunc.refGene'].isin([
-            "stopgain", "stoploss", "startloss", "frameshift deletion",
-            "frameshift substitution", "frameshift insertion", "nonsynonymous SNV"
-        ]))
-    )
+    functional_terms = ["stopgain", "stoploss", "startloss","frameshift deletion", "frameshift substitution", "frameshift insertion", "nonsynonymous SNV"]
+    functional_filter = annotate_df['ExonicFunc.refGene'].isin(functional_terms)
+    splicing_filter = annotate_df['Func.refGene'] == "splicing"
 
     # Separate whitelist and other variants
     white_list_variants = annotate_df[
@@ -214,15 +212,22 @@ def process_file(annotate_df, gq, ad, gnomad):
         (annotate_df['GQ'] > gq) & (annotate_df['AD_alt'] > ad)
     ]
 
-    other_variants = annotate_df[
+    functional_variants = annotate_df[
         (~annotate_df['variant_id'].isin(white_list['variant_id'])) &
-        (annotate_df['gnomad41_exome_AF_grpmax'] <= gnomad) & #*******change
+        (annotate_df['gnomad41_exome_AF_grpmax'] <= gnomad) & #exome
         functional_filter &
-        (annotate_df['GQ'] > gq) & (annotate_df['AD_alt'] > ad) #*****15******
+        (annotate_df['GQ'] > gq) & (annotate_df['AD_alt'] > ad) 
+    ]
+    
+    splicing_variants = annotate_df[
+        (~annotate_df['variant_id'].isin(white_list['variant_id'])) &
+        (annotate_df['gnomad41_genome_AF_grpmax'] <= gnomad) & # genome
+        splicing_filter &
+        (annotate_df['GQ'] > gq) & (annotate_df['AD_alt'] > ad)
     ]
 
     # Combine results
-    filtered_variants = pd.concat([white_list_variants, other_variants])
+    filtered_variants = pd.concat([white_list_variants, functional_variants, splicing_variants])
     
     # Remove duplicates based on 'Chr' and 'Start'
     filtered_variants = filtered_variants.drop_duplicates(subset=['Chr', 'Start'])
